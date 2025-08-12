@@ -3,44 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <title>미디어 리터러시 역량 체크리스트</title>
-  <style>
-    body {
-      font-family: 'Noto Sans KR', sans-serif;
-      max-width: 700px;
-      margin: 0 auto;
-      padding: 20px;
-      background: #f8fafc;
-      color: #1f2937;
-    }
-    h1, h2 { color: #111827; }
-    .question {
-      margin-bottom: 20px;
-      padding: 15px;
-      background: #ffffff;
-      border: 1px solid #e5e7eb;
-      border-radius: 8px;
-    }
-    .options { margin-top: 8px; }
-    label { margin-right: 10px; }
-    button {
-      background: #2563eb;
-      color: white;
-      border: none;
-      padding: 10px 18px;
-      font-size: 16px;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-    button:hover { background: #1e40af; }
-    .result {
-      margin-top: 25px;
-      padding: 15px;
-      background: #e0f2fe;
-      border: 1px solid #bae6fd;
-      border-radius: 8px;
-      display: none;
-    }
-  </style>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <header>
@@ -124,27 +87,6 @@
 
   <div class="result" id="resultBox"></div>
 
-  <script>
-    document.getElementById('quizForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      let total = 0;
-      for (let i = 1; i <= 6; i++) {
-        const score = parseInt(document.querySelector(`input[name="q${i}"]:checked`).value);
-        total += score;
-      }
-      const maxScore = 6 * 5;
-      let message = '';
-      if (total >= 26) {
-        message = '훌륭합니다! 역량이 매우 높습니다.';
-      } else if (total >= 18) {
-        message = '좋아요! 하지만 조금 더 주의하세요.';
-      } else {
-        message = '주의가 필요합니다.';
-      }
-      const resultBox = document.getElementById('resultBox');
-      resultBox.innerHTML = `<h3>총점: ${total} / ${maxScore}</h3><p>${message}</p>`;
-      resultBox.style.display = 'block';
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
