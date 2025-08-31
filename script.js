@@ -73,7 +73,15 @@ document.getElementById("quizForm").addEventListener("submit", (e) => {
   e.preventDefault();
   saveAnswer();
 
-  const totalScore = answers.reduce((a,b) => a + (b || 0), 0);
+
+  const unansweredIndex = answers.findIndex(ans => ans === null);
+  if (unansweredIndex !== -1) {
+    alert(`${unansweredIndex + 1}번 문항에 답해주세요!`);
+    renderQuestion(unansweredIndex);
+    return;
+  }
+
+  const totalScore = answers.reduce((a, b) => a + b, 0);
   let message = "";
 
   if (totalScore <= 20) message = "정보 무방비형(0~20점) : 정보에 무비판적으로 노출될 가능성이 높습니다. 빠르게 리터러시 훈련이 필요합니다";
@@ -83,6 +91,7 @@ document.getElementById("quizForm").addEventListener("submit", (e) => {
   else message = "탐색형 리터러시 고수(51~60점) : 정보를 다각도로 분석하고 비판적으로 사고할 수 있는 우수한 리터러시 역량 보유자입니다";
 
   resultBox.innerText = `총점: ${totalScore}점 — ${message}`;
+});
 });
 
 renderQuestion(currentIndex);
