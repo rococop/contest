@@ -1,3 +1,4 @@
+나의 말:
 const questions = [
   { topic: "정보 판별력", text: "뉴스나 정보를 볼 때 출처를 꼭 확인한다." },
   { topic: "정보 판별력", text: "AI가 제공한 정보를 그냥 믿지 않고 확인한다." },
@@ -27,19 +28,19 @@ const resultBox = document.getElementById("resultBox");
 
 function renderQuestion(index) {
   const q = questions[index];
-  questionBox.innerHTML = `
+  questionBox.innerHTML = 
     <h2>[${q.topic}]</h2>
     <p>${q.text}</p>
     <div>
-      ${[1,2,3,4,5].map(v => `
+      ${[1,2,3,4,5].map(v => 
         <label>
           <input type="radio" name="q${index}" value="${v}" 
           ${answers[index] == v ? "checked" : ""}>
           ${v}점
         </label>
-      `).join("<br>")}
+      ).join("<br>")}
     </div>
-  `;
+  ;
 
   prevBtn.style.display = index > 0 ? "inline-block" : "none";
   nextBtn.style.display = index < questions.length - 1 ? "inline-block" : "none";
@@ -47,7 +48,7 @@ function renderQuestion(index) {
 }
 
 function saveAnswer() {
-  const selected = document.querySelector(`input[name="q${currentIndex}"]:checked`);
+  const selected = document.querySelector(input[name="q${currentIndex}"]:checked);
   if (selected) {
     answers[currentIndex] = parseInt(selected.value);
   }
@@ -73,15 +74,7 @@ document.getElementById("quizForm").addEventListener("submit", (e) => {
   e.preventDefault();
   saveAnswer();
 
-
-  const unansweredIndex = answers.findIndex(ans => ans === null);
-  if (unansweredIndex !== -1) {
-    alert(`${unansweredIndex + 1}번 문항에 답해주세요!`);
-    renderQuestion(unansweredIndex);
-    return;
-  }
-
-  const totalScore = answers.reduce((a, b) => a + b, 0);
+  const totalScore = answers.reduce((a,b) => a + (b || 0), 0);
   let message = "";
 
   if (totalScore <= 20) message = "정보 무방비형(0~20점) : 정보에 무비판적으로 노출될 가능성이 높습니다. 빠르게 리터러시 훈련이 필요합니다";
@@ -90,9 +83,5 @@ document.getElementById("quizForm").addEventListener("submit", (e) => {
   else if (totalScore <= 50) message = "주의 깊은 감별자(41~50점) : 기본적인 정보 감별력과 사고력은 뛰어나지만, 편향성 감지나 습관화에 조금 더 노력 할 필요가 있어요";
   else message = "탐색형 리터러시 고수(51~60점) : 정보를 다각도로 분석하고 비판적으로 사고할 수 있는 우수한 리터러시 역량 보유자입니다";
 
-  resultBox.innerText = `총점: ${totalScore}점 — ${message}`;
+  resultBox.innerText = 총점: ${totalScore}점 — ${message};
 });
-});
-
-renderQuestion(currentIndex);
-
