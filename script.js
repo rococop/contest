@@ -84,3 +84,5 @@ document.getElementById("quizForm").addEventListener("submit", (e) => {
 
   resultBox.innerText = 총점: ${totalScore}점 — ${message};
 });
+
+renderQuestion(currentIndex);
