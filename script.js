@@ -73,15 +73,7 @@ document.getElementById("quizForm").addEventListener("submit", (e) => {
   e.preventDefault();
   saveAnswer();
 
-  // 아직 답 안 한 문항 확인
-  const unansweredIndex = answers.findIndex(ans => ans === null);
-  if (unansweredIndex !== -1) {
-    alert(`${unansweredIndex + 1}번 문항에 답해주세요!`);
-    renderQuestion(unansweredIndex);
-    return;
-  }
-
-  const totalScore = answers.reduce((a, b) => a + b, 0);
+  const totalScore = answers.reduce((a,b) => a + (b || 0), 0);
   let message = "";
 
   if (totalScore <= 20) message = "정보 무방비형(0~20점) : 정보에 무비판적으로 노출될 가능성이 높습니다. 빠르게 리터러시 훈련이 필요합니다";
@@ -93,5 +85,4 @@ document.getElementById("quizForm").addEventListener("submit", (e) => {
   resultBox.innerText = `총점: ${totalScore}점 — ${message}`;
 });
 
-// 첫 질문 출력
 renderQuestion(currentIndex);
